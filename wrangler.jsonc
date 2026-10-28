@@ -1,5 +1,5 @@
 {
-  "name": "astro-keystatic-blog",
+  "name": "astro-keystatic-template",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./dist",
