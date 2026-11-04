@@ -17,9 +17,17 @@ export default defineConfig({
   vite: {
     ssr: {
       optimizeDeps: {
-        // Pre-bundle Keystatic's CommonJS dependencies for the Cloudflare dev runtime.
-        // Without this, /api/keystatic fails in `npm run dev` with "exports is not defined".
-        include: ['@keystatic/core', '@keystatic/core/api/generic'],
+        // Pre-bundle these for the Cloudflare dev runtime (workerd) at startup.
+        // Keystatic: without this, /api/keystatic fails with "exports is not defined".
+        // Markdoc: otherwise Vite finds them on the first post view and reloads mid-request,
+        // which can fail with "The file does not exist ... in the optimize deps directory".
+        include: [
+          '@keystatic/core',
+          '@keystatic/core/api/generic',
+          '@astrojs/markdoc/components',
+          '@astrojs/markdoc/runtime',
+          '@astrojs/markdoc/runtime-assets-config',
+        ],
       },
     },
   },
