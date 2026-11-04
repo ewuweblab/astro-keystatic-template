@@ -1,0 +1,102 @@
+---
+title: Kitchen Sink
+description: Every formatting option the Keystatic editor offers, for testing styles.
+showInNav: false
+navOrder: 99
+---
+This page uses every built-in option in the Keystatic content editor. Use it to check how each one renders before styling the site.
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+
+## Inline formatting
+
+A paragraph with **bold**, *italic*, ~~strikethrough~~ and `inline code`. Marks can be combined: ***bold italic***, **bold with `code`**, and *~~italic strikethrough~~*.
+
+Links can point to [another page on this site](/about/) or to [an external site](https://keystatic.com "Keystatic website").
+
+This line ends with a hard break (Shift+Enter in the editor)\
+so this text starts on a new line in the same paragraph.
+
+## Lists
+
+An unordered list:
+
+- First item
+- Second item with **bold** text
+  - Nested item
+  - Another nested item
+    - A third level
+- Third item
+
+An ordered list:
+
+1. Step one
+2. Step two
+   1. Sub-step A
+   2. Sub-step B
+3. Step three
+
+## Blockquote
+
+> A blockquote can hold *formatted* text and [links](/contact/).
+>
+> It can also span more than one paragraph.
+
+## Code block
+
+```js
+// A fenced code block with a language set
+export function greet(name) {
+  return `Hello, ${name}!`;
+}
+```
+
+```
+A code block with no language.
+```
+
+## Table
+
+{% table %}
+- Option
+- Toolbar / shortcut
+- Markdown output
+---
+- Bold
+- Cmd+B
+- `**text**`
+---
+- Italic
+- Cmd+I
+- `*text*`
+---
+- Strikethrough
+- Toolbar
+- `~~text~~`
+---
+- Inline code
+- Cmd+E or backticks
+- `` `text` ``
+{% /table %}
+
+## Image
+
+![A forest at dusk](../../assets/images/pages/kitchen-sink/sample-forest.png "Sample image with a title")
+
+## Divider
+
+The line below is a divider (horizontal rule).
+
+---
+
+That's everything the editor offers out of the box. Custom blocks can be added through the `components` option on the content field.
