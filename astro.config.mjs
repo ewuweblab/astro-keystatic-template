@@ -14,4 +14,13 @@ export default defineConfig({
     allowedHosts: ['.app.github.dev'],
   },
   adapter: cloudflare(),
+  vite: {
+    ssr: {
+      optimizeDeps: {
+        // Pre-bundle Keystatic's CommonJS dependencies for the Cloudflare dev runtime.
+        // Without this, /api/keystatic fails in `npm run dev` with "exports is not defined".
+        include: ['@keystatic/core'],
+      },
+    },
+  },
 });
