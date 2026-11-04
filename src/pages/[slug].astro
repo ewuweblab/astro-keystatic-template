@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: { slug: page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{page.data.title}</title>
+    {page.data.description && <meta name="description" content={page.data.description} />}
+  </head>
+  <body>
+    <a href="/">← Home</a>
+    <h1>{page.data.title}</h1>
+    <Content />
+  </body>
+</html>

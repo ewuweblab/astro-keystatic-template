@@ -9,4 +9,15 @@ const posts = defineCollection({
   }),
 });
 
-export const collections = { posts };
+const pages = defineCollection({
+  loader: glob({ pattern: '**/*.mdoc', base: './src/content/pages' }),
+  schema: z.object({
+    title: z.string(),
+    // Keystatic omits empty optional fields from frontmatter, so default them here.
+    description: z.string().optional(),
+    showInNav: z.boolean().default(true),
+    navOrder: z.number().default(0),
+  }),
+});
+
+export const collections = { posts, pages };

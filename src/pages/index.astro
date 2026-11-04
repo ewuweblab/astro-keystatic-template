@@ -2,6 +2,9 @@
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('posts');
+const navPages = (await getCollection('pages', (page) => page.data.showInNav)).sort(
+  (a, b) => a.data.navOrder - b.data.navOrder,
+);
 ---
 <html lang="en">
   <head>
@@ -10,6 +13,13 @@ const posts = await getCollection('posts');
     <title>My Keystatic Blog</title>
   </head>
   <body>
+    {navPages.length > 0 && (
+      <nav>
+        {navPages.map((page) => (
+          <a href={`/${page.id}/`}>{page.data.title}</a>
+        ))}
+      </nav>
+    )}
     <h1>My Keystatic Blog</h1>
     <ul>
       {posts.map((post) => (
