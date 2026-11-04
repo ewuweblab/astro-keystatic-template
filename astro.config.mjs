@@ -19,7 +19,7 @@ export default defineConfig({
       optimizeDeps: {
         // Pre-bundle Keystatic's CommonJS dependencies for the Cloudflare dev runtime.
         // Without this, /api/keystatic fails in `npm run dev` with "exports is not defined".
-        include: ['@keystatic/core'],
+        include: ['@keystatic/core', '@keystatic/core/api/generic'],
       },
     },
   },
