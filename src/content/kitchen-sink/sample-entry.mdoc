@@ -1,0 +1,78 @@
+---
+title: Sample Entry
+subtitle: One entry that fills in every Keystatic field type
+summary: |-
+  This is a multiline text field.
+  Line breaks are kept as typed.
+website: https://keystatic.com
+quantity: 12
+rating: 4.5
+publishDate: 2026-11-04
+eventStart: 2026-11-20T18:30
+featured: true
+status: review
+tags:
+  - tutorial
+  - release
+image: ../../assets/images/kitchen-sink/sample-entry/image.png
+attachment: /files/kitchen-sink/sample-entry/attachment.txt
+cloudImage:
+  src: https://picsum.photos/id/10/800/600
+  alt: Placeholder landscape photo
+  width: 800
+  height: 600
+relatedPost: first
+relatedPages:
+  - about
+  - contact
+sourceFile: src/content/posts/first.mdoc
+author:
+  name: Ada Example
+  email: ada@example.com
+  bio: Writes sample content for testing.
+keywords:
+  - keystatic
+  - astro
+  - cms
+links:
+  - label: Keystatic docs
+    href: https://keystatic.com/docs
+  - label: Astro docs
+    href: https://docs.astro.build
+callToAction:
+  discriminant: true
+  value:
+    text: Read the docs
+    href: https://keystatic.com/docs
+media:
+  discriminant: quote
+  value:
+    text: Content is easier to manage when every field has a clear job.
+    attribution: The Kitchen Sink
+sections:
+  - discriminant: heading
+    value:
+      text: Getting started
+      level: h2
+  - discriminant: callout
+    value:
+      tone: warning
+      body: Blocks let each list item be a different shape.
+  - discriminant: stat
+    value:
+      value: 27
+      label: Field types shown
+tagline: A *short* line of inline Markdoc with a [link](https://keystatic.com).
+mdxTagline: Inline **MDX** text.
+buildMeta:
+  generatedBy: sample
+  note: Kept as-is by fields.ignored and hidden in the editor.
+---
+This is the main content field (`fields.markdoc`), stored as the body of this file.
+
+## A heading
+
+Some **bold**, *italic* and `code` text, plus a list:
+
+- One
+- Two
