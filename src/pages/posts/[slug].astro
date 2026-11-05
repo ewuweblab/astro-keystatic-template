@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import Prose from '../../components/Prose.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -14,9 +15,15 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 <Layout title={post.data.title}>
-  <a href="/" class="text-sm text-gray-500 hover:underline">← All posts</a>
-  <article class="prose mt-4">
-    <h1>{post.data.title}</h1>
-    <Content />
+  <article>
+    <header class="mb-10 border-b border-zinc-200 pb-8 dark:border-zinc-800">
+      <a href="/" class="group mb-6 inline-flex items-center gap-1.5 text-sm text-zinc-500 transition hover:text-accent-600 dark:text-zinc-400 dark:hover:text-accent-400">
+        <span aria-hidden="true" class="transition group-hover:-translate-x-0.5">←</span> All posts
+      </a>
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl dark:text-white">{post.data.title}</h1>
+    </header>
+    <Prose>
+      <Content />
+    </Prose>
   </article>
 </Layout>

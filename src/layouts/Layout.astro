@@ -13,36 +13,72 @@ const siteName = 'My Keystatic Blog';
 const navPages = (await getCollection('pages', (page) => page.data.showInNav)).sort(
   (a, b) => a.data.navOrder - b.data.navOrder,
 );
+
+const navLinks = [
+  { href: '/', label: 'Posts' },
+  ...navPages.map((page) => ({ href: `/${page.id}/`, label: page.data.title })),
+];
+
+// "/" is only active on the home page and on posts; other links match their own path.
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' || path.startsWith('/posts/') : path.startsWith(href);
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title === siteName ? title : `${title} · ${siteName}`}</title>
     {description && <meta name="description" content={description} />}
   </head>
-  <body class="min-h-screen flex flex-col bg-white text-gray-900 antialiased">
-    <header class="border-b border-gray-200">
-      <div class="mx-auto max-w-3xl px-4 py-4 flex items-center justify-between gap-4">
-        <a href="/" class="font-semibold">{siteName}</a>
-        {navPages.length > 0 && (
-          <nav class="flex gap-4 text-sm">
-            {navPages.map((page) => (
-              <a href={`/${page.id}/`} class="hover:underline">{page.data.title}</a>
+  <body class="flex min-h-screen flex-col bg-white font-sans text-zinc-800 antialiased dark:bg-zinc-950 dark:text-zinc-200">
+    <a
+      href="#main"
+      class="sr-only rounded-md bg-accent-600 px-3 py-2 text-sm font-medium text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50"
+    >
+      Skip to content
+    </a>
+
+    <header class="sticky top-0 z-40 border-b border-zinc-200/80 bg-white/80 backdrop-blur dark:border-zinc-800/80 dark:bg-zinc-950/80">
+      <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-4 sm:px-6">
+        <a href="/" class="group flex items-center gap-2.5 font-semibold tracking-tight text-zinc-900 dark:text-white">
+          <span class="grid size-7 place-items-center rounded-lg bg-accent-600 text-xs font-bold text-white transition group-hover:bg-accent-500">
+            {siteName.charAt(0)}
+          </span>
+          {siteName}
+        </a>
+        <nav aria-label="Main">
+          <ul class="flex flex-wrap gap-1 text-sm">
+            {navLinks.map(({ href, label }) => (
+              <li>
+                <a
+                  href={href}
+                  aria-current={isActive(href) ? 'page' : undefined}
+                  class="rounded-md px-3 py-1.5 text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 aria-[current=page]:bg-accent-50 aria-[current=page]:font-medium aria-[current=page]:text-accent-700 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white dark:aria-[current=page]:bg-accent-950 dark:aria-[current=page]:text-accent-300"
+                >
+                  {label}
+                </a>
+              </li>
             ))}
-          </nav>
-        )}
+          </ul>
+        </nav>
       </div>
     </header>
 
-    <main class="mx-auto w-full max-w-3xl flex-1 px-4 py-10">
+    <main id="main" class="mx-auto w-full max-w-3xl flex-1 px-4 py-12 sm:px-6 sm:py-16">
       <slot />
     </main>
 
-    <footer class="border-t border-gray-200">
-      <div class="mx-auto max-w-3xl px-4 py-6 text-sm text-gray-500">
-        © {new Date().getFullYear()} {siteName}
+    <footer class="border-t border-zinc-200 dark:border-zinc-800">
+      <div class="mx-auto flex max-w-3xl flex-col gap-2 px-4 py-8 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 dark:text-zinc-400">
+        <p>© {new Date().getFullYear()} {siteName}</p>
+        <p>
+          Built with
+          <a href="https://astro.build" class="font-medium text-zinc-700 hover:text-accent-600 dark:text-zinc-300 dark:hover:text-accent-400">Astro</a>
+          &amp;
+          <a href="https://keystatic.com" class="font-medium text-zinc-700 hover:text-accent-600 dark:text-zinc-300 dark:hover:text-accent-400">Keystatic</a>
+        </p>
       </div>
     </footer>
   </body>

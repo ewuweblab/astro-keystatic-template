@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import Prose from '../components/Prose.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -14,8 +15,15 @@ const { page } = Astro.props;
 const { Content } = await render(page);
 ---
 <Layout title={page.data.title} description={page.data.description}>
-  <article class="prose">
-    <h1>{page.data.title}</h1>
-    <Content />
+  <article>
+    <header class="mb-10 border-b border-zinc-200 pb-8 dark:border-zinc-800">
+      <h1 class="text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl dark:text-white">{page.data.title}</h1>
+      {page.data.description && (
+        <p class="mt-4 text-lg text-zinc-600 dark:text-zinc-400">{page.data.description}</p>
+      )}
+    </header>
+    <Prose>
+      <Content />
+    </Prose>
   </article>
 </Layout>
