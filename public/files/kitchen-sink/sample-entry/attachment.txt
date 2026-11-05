@@ -1,2 +1,0 @@
-Sample attachment for the Kitchen Sink entry.
-Uploaded through the "File" field (fields.file) and served at /files/kitchen-sink/sample-entry/attachment.txt
