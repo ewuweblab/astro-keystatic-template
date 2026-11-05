@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import Prose from '../../components/Prose.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -22,8 +21,8 @@ const { Content } = await render(post);
       </a>
       <h1 class="text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl dark:text-white">{post.data.title}</h1>
     </header>
-    <Prose>
+    <div class="prose prose-zinc max-w-none dark:prose-invert prose-headings:tracking-tight prose-a:text-accent-600 dark:prose-a:text-accent-400 prose-img:rounded-xl">
       <Content />
-    </Prose>
+    </div>
   </article>
 </Layout>
