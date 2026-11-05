@@ -6,6 +6,8 @@ import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 import cloudflare from '@astrojs/cloudflare';
 
+import tailwindcss from '@tailwindcss/vite';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), markdoc(), keystatic()],
@@ -30,5 +32,7 @@ export default defineConfig({
         ],
       },
     },
+
+    plugins: [tailwindcss()],
   },
 });

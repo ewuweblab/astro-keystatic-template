@@ -1,30 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
 
 const posts = await getCollection('posts');
-const navPages = (await getCollection('pages', (page) => page.data.showInNav)).sort(
-  (a, b) => a.data.navOrder - b.data.navOrder,
-);
 ---
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>My Keystatic Blog</title>
-  </head>
-  <body>
-    {navPages.length > 0 && (
-      <nav>
-        {navPages.map((page) => (
-          <a href={`/${page.id}/`}>{page.data.title}</a>
-        ))}
-      </nav>
-    )}
-    <h1>My Keystatic Blog</h1>
-    <ul>
-      {posts.map((post) => (
-        <li><a href={`/posts/${post.id}/`}>{post.data.title}</a></li>
-      ))}
-    </ul>
-  </body>
-</html>
+<Layout title="My Keystatic Blog">
+  <h1 class="text-3xl font-bold mb-6">Posts</h1>
+  <ul class="space-y-2">
+    {posts.map((post) => (
+      <li><a href={`/posts/${post.id}/`} class="hover:underline">{post.data.title}</a></li>
+    ))}
+  </ul>
+</Layout>

@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const siteName = 'My Keystatic Blog';
+
+const navPages = (await getCollection('pages', (page) => page.data.showInNav)).sort(
+  (a, b) => a.data.navOrder - b.data.navOrder,
+);
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title === siteName ? title : `${title} · ${siteName}`}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-gray-900 antialiased">
+    <header class="border-b border-gray-200">
+      <div class="mx-auto max-w-3xl px-4 py-4 flex items-center justify-between gap-4">
+        <a href="/" class="font-semibold">{siteName}</a>
+        {navPages.length > 0 && (
+          <nav class="flex gap-4 text-sm">
+            {navPages.map((page) => (
+              <a href={`/${page.id}/`} class="hover:underline">{page.data.title}</a>
+            ))}
+          </nav>
+        )}
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-3xl flex-1 px-4 py-10">
+      <slot />
+    </main>
+
+    <footer class="border-t border-gray-200">
+      <div class="mx-auto max-w-3xl px-4 py-6 text-sm text-gray-500">
+        © {new Date().getFullYear()} {siteName}
+      </div>
+    </footer>
+  </body>
+</html>
