@@ -1,7 +1,7 @@
 ---
 title: Kitchen Sink
 description: Every formatting option the Keystatic editor offers, for testing styles.
-showInNav: false
+showInNav: true
 navOrder: 99
 ---
 This page uses every built-in option in the Keystatic content editor. Use it to check how each one renders before styling the site.
@@ -22,7 +22,7 @@ This page uses every built-in option in the Keystatic content editor. Use it to 
 
 A paragraph with **bold**, *italic*, ~~strikethrough~~ and `inline code`. Marks can be combined: ***bold italic***, **bold with `code`**, and *~~italic strikethrough~~*.
 
-Links can point to [another page on this site](/about/) or to [an external site](https://keystatic.com "Keystatic website").
+Links can point to [another page on this site](/about/) or to [an external site](https://keystatic.com).
 
 This line ends with a hard break (Shift+Enter in the editor)\
 so this text starts on a new line in the same paragraph.
@@ -41,15 +41,15 @@ An unordered list:
 An ordered list:
 
 1. Step one
-2. Step two
+1. Step two
    1. Sub-step A
-   2. Sub-step B
-3. Step three
+   1. Sub-step B
+1. Step three
 
 ## Blockquote
 
 > A blockquote can hold *formatted* text and [links](/contact/).
->
+> 
 > It can also span more than one paragraph.
 
 ## Code block
@@ -86,7 +86,7 @@ A code block with no language.
 ---
 - Inline code
 - Cmd+E or backticks
-- `` `text` ``
+- `text`
 {% /table %}
 
 ## Image
