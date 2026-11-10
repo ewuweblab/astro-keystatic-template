@@ -3,12 +3,13 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
 const posts = await getCollection('posts');
+const title = 'The Client Website';
 ---
-<Layout title="My Keystatic Blog">
+<Layout title={title}>
   <section class="mb-14">
     <p class="mb-3 text-sm font-medium text-accent-600 dark:text-accent-400">Welcome</p>
     <h1 class="text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl dark:text-white">
-      My Keystatic Blog
+      {title}
     </h1>
     <p class="mt-4 max-w-xl text-lg text-zinc-600 dark:text-zinc-400">
       A short introduction to the site goes here. Replace this text with what your blog is about.

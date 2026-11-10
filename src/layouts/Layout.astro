@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-const siteName = 'My Keystatic Blog';
+const siteName = 'The Client Website';
 
 const navPages = (await getCollection('pages', (page) => page.data.showInNav)).sort(
   (a, b) => a.data.navOrder - b.data.navOrder,
